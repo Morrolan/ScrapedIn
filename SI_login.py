@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from urllib.error import URLError
 
 __author__ = 'Danny Chrastil'
 __email__ = 'danny.chrastil@gmail.com'
@@ -68,8 +69,8 @@ def linked_in():
 def load_page(url, data=None):
     try:
         response = opener.open(url)
-    except:
-        print("\n[URLError] Your IP may have been temporarily blocked.")
+    except URLError:
+        print("URLError: Your IP may have been temporarily blocked.")
 
     try:
         if data is not None:
@@ -78,11 +79,11 @@ def load_page(url, data=None):
             response = opener.open(url)
         # return response.headers.get('Set-Cookie')
         return ''.join(response.readlines())
-    except:
+    except URLError:
         # If URL doesn't load for ANY reason, try again...
         # Quick and dirty solution for 404 returns because of network problems
         # However, this could infinite loop if there's an actual problem
-        print(" [Notice] Exception hit")
+        print("URLError: Your IP may have been temporarily blocked (2nd attempt).")
         sys.exit(0)
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-__title__ = "ScrapeIn - Tool to Scrape LinkedIn"
+__title__ = "ScrapeIn3 - Python 3 compatible Tool to Scrape LinkedIn"
 __author__ = 'Danny Chrastil'
 __email__ = 'danny.chrastil@gmail.com'
 __description__ = "A recon tool that allows you to scrape profile search results from LinkedIn"
@@ -8,21 +8,15 @@ __disclaimer__ = "This tool violates TOS of LinkedIn.com. For educational purpos
 __version__ = '2.0'
 
 import sys
-import re
-import time
 import xlsxwriter
 import json
 import argparse
 import requests
 import subprocess
-import urllib
 import urllib.parse
-import math
-from thready import threaded
 from importlib import reload
 
 reload(sys)
-# sys.setdefaultencoding('utf-8')
 
 """ Setup Argument Parameters """
 parser = argparse.ArgumentParser(description='Discovery LinkedIn')
@@ -128,7 +122,8 @@ def get_search():
 
 def authenticate():
     try:
-        session = subprocess.Popen(['python', 'SI_login.py'], stdout=subprocess.PIPE).communicate()[0].replace(b"\n", b"")
+        session = subprocess.Popen(['python', 'SI_login.py'], stdout=subprocess.PIPE).communicate()[0].replace(b"\n",
+                                                                                                               b"")
         if len(session) == 0:
             sys.exit("[Error] Unable to login to LinkedIn.com")
         print("[Info] Obtained new session: {0}".format(session))
@@ -151,8 +146,10 @@ Python 3 tool to scrape linkedin v2.0
     print(title)
 
     # Prompt user for data variables
-    search = args.keywords if args.keywords is not None else input("\nEnter search Keywords (use quotes for more percise results)\n--> ")
-    outfile = args.output if args.output is not None else input("\nEnter filename for output (exclude file extension)\n--> ")
+    search = args.keywords if args.keywords is not None else input(
+        "\nEnter search Keywords (use quotes for more percise results)\n--> ")
+    outfile = args.output if args.output is not None else input(
+        "\nEnter filename for output (exclude file extension)\n--> ")
 
     # URL Encode for the querystring
     search = urllib.parse.quote_plus(search)
