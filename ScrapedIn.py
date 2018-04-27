@@ -125,11 +125,11 @@ def authenticate():
         session = subprocess.Popen(['python', 'SI_login.py'], stdout=subprocess.PIPE).communicate()[0].replace(b"\n",
                                                                                                                b"")
         if len(session) == 0:
-            sys.exit("[Error] Unable to login to LinkedIn.com")
-        print("[Info] Obtained new session: {0}".format(session))
+            sys.exit("[Error] Unable to login to LinkedIn.com\n")
+        print("[Info] Obtained new session: {0}\n".format(session))
         _cookies = dict(li_at=session)
     except Exception as e:
-        sys.exit("[Fatal] Could not authenticate to linkedin. %s" % e)
+        sys.exit("[Fatal] Could not authenticate to linkedin. %s\n" % e)
     return _cookies
 
 
@@ -147,7 +147,7 @@ Python 3 tool to scrape linkedin v2.0
 
     # Prompt user for data variables
     search = args.keywords if args.keywords is not None else input(
-        "\nEnter search Keywords (use quotes for more percise results)\n--> ")
+        "\nEnter search Keywords (use quotes for more precise results)\n--> ")
     outfile = args.output if args.output is not None else input(
         "\nEnter filename for output (exclude file extension)\n--> ")
 

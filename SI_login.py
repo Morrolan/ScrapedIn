@@ -44,7 +44,7 @@ def linked_in():
         )
 
     # Get CSRF Token
-    print("[Status] Obtaining a CSRF token")
+    print("[Status] Obtaining a CSRF token\n")
     html = load_page("https://www.linkedin.com/")
     soup = BeautifulSoup(html, "html.parser")
     csrf = soup.find(id="loginCsrfParam-login")['value']
@@ -70,7 +70,7 @@ def load_page(url, data=None):
     try:
         response = opener.open(url)
     except URLError:
-        print("URLError: Your IP may have been temporarily blocked.")
+        print("URLError: Your IP may have been temporarily blocked.\n")
 
     try:
         if data is not None:
@@ -83,7 +83,7 @@ def load_page(url, data=None):
         # If URL doesn't load for ANY reason, try again...
         # Quick and dirty solution for 404 returns because of network problems
         # However, this could infinite loop if there's an actual problem
-        print("URLError: Your IP may have been temporarily blocked (2nd attempt).")
+        print("URLError: Your IP may have been temporarily blocked (2nd attempt).\n")
         sys.exit(0)
 
 
